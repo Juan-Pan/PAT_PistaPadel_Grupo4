@@ -1,0 +1,13 @@
+package edu.comillas.icai.pista_padel;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class PistaPadelApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(PistaPadelApplication.class, args);
+	}
+
+}
