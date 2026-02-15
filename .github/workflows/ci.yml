@@ -1,7 +1,8 @@
 name: CI
 on:
-  push:
+  pull_request:
     branches: [ "main" ]
+  workflow_call:
 jobs:
   html-validator:
     runs-on: ubuntu-latest
