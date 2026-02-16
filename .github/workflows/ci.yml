@@ -1,12 +1,26 @@
-name: CI
+name: CI - Backend Java
+
+# ¿CUÁNDO SE EJECUTA?
 on:
+  push:
+    branches: [ "main", "develop" ] # Cuando alguien sube código a estas ramas
   pull_request:
-    branches: [ "main" ]
-  workflow_call:
+    branches: [ "main", "develop" ] # Cuando alguien abre un Pull Request
+
 jobs:
-  html-validator:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: HTML validator
-      run: docker run --rm -v ${{ github.workspace }}/src:/src ghcr.io/validator/validator:latest vnu /src/index.html
+      - name: Descargar código (Checkout)
+        uses: actions/checkout@v4
+
+      - name: Instalar Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'   
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Compilar y Testear con Maven
+        # Si este paso falla, GitHub bloqueará el Pull Request
+        run: mvn -B verify --file pom.xml
