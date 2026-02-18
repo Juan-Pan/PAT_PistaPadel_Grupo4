@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
-public class RepositorioPistasEnMemoria implements RepositorioPistas {
+public class RepositorioPistasEnMemoria implements RepositorioPistasMemoria {
 
     private final ConcurrentHashMap<Long, Pista> pistas = new ConcurrentHashMap<>();
     private final AtomicLong contador = new AtomicLong(0);
@@ -30,12 +30,17 @@ public class RepositorioPistasEnMemoria implements RepositorioPistas {
     }
 
     @Override
-    public Optional<Pista> buscarPorNombre(String nombre) {
+    public Optional<Pista> findByNombre(String nombre) {
         if (nombre == null) return Optional.empty();
         for (Pista p : pistas.values()) {
             if (nombre.equalsIgnoreCase(p.getNombre())) return Optional.of(p);
         }
         return Optional.empty();
+    }
+
+    @Override
+    public Optional<Pista> buscarPorNombre(String nombre) {
+        return findByNombre(nombre);
     }
 
     @Override
