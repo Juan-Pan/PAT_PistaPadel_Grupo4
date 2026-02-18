@@ -1,6 +1,5 @@
 package edu.comillas.icai.pista_padel.seguridad;
 
-
 import edu.comillas.icai.pista_padel.entity.Rol;
 import edu.comillas.icai.pista_padel.entity.Usuario;
 import edu.comillas.icai.pista_padel.repositorio.RepositorioUsuarios;
