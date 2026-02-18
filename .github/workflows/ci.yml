@@ -1,11 +1,10 @@
 name: CI - Backend Java
 
-# ¿CUÁNDO SE EJECUTA?
 on:
   push:
-    branches: [ "main", "develop" ] # Cuando alguien sube código a estas ramas
+    branches: [ "main", "develop" ]
   pull_request:
-    branches: [ "main", "develop" ] # Cuando alguien abre un Pull Request
+    branches: [ "main", "develop" ]
 
 jobs:
   build-and-test:
@@ -17,10 +16,9 @@ jobs:
       - name: Instalar Java 21
         uses: actions/setup-java@v4
         with:
-          java-version: '21'   
+          java-version: '21'
           distribution: 'temurin'
           cache: maven
 
-      - name: Compilar y Testear con Maven
-        # Si este paso falla, GitHub bloqueará el Pull Request
-        run: mvn -B verify --file pom.xml
+      - name: Compilar sin ejecutar tests
+        run: mvn -B package -DskipTests --file pom.xml

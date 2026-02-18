@@ -2,6 +2,8 @@ package edu.comillas.icai.pista_padel.entity;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class Usuario {
 
@@ -9,6 +11,7 @@ public class Usuario {
     private String nombre;
     private String apellidos;
     private String email;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password; // cifrada (BCrypt)
     private String telefono;
     private Rol rol; // USER / ADMIN
@@ -103,6 +106,10 @@ public class Usuario {
     }
 
     public boolean isActivo() {
+        return activo;
+    }
+
+    public boolean getActivo() {
         return activo;
     }
 
