@@ -1,18 +1,28 @@
 package edu.comillas.icai.pista_padel.entity;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Entity
+@Table(name = "pistas")
 public class Pista {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPista;
-    private String nombre;       // único
+
+    @Column(unique = true, nullable = false)
+    private String nombre;
+
     private String ubicacion;
     private double precioHora;
     private boolean activa;
     private LocalDateTime fechaAlta;
 
     public Pista() {
+        this.activa = true;
+        this.fechaAlta = LocalDateTime.now();
     }
 
     public Pista(Long idPista,
@@ -27,6 +37,16 @@ public class Pista {
         this.precioHora = precioHora;
         this.activa = activa;
         this.fechaAlta = fechaAlta;
+    }
+
+    public Pista(String nombre,
+                 String ubicacion,
+                 double precioHora) {
+        this.nombre = nombre;
+        this.ubicacion = ubicacion;
+        this.precioHora = precioHora;
+        this.activa = true;
+        this.fechaAlta = LocalDateTime.now();
     }
 
     public Long getIdPista() {
@@ -75,6 +95,18 @@ public class Pista {
 
     public void setFechaAlta(LocalDateTime fechaAlta) {
         this.fechaAlta = fechaAlta;
+    }
+
+    @Override
+    public String toString() {
+        return "Pista{" +
+                "idPista=" + idPista +
+                ", nombre='" + nombre + '\'' +
+                ", ubicacion='" + ubicacion + '\'' +
+                ", precioHora=" + precioHora +
+                ", activa=" + activa +
+                ", fechaAlta=" + fechaAlta +
+                '}';
     }
 
     @Override

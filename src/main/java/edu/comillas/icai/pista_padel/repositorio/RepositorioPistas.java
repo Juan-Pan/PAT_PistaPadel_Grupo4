@@ -1,14 +1,15 @@
 package edu.comillas.icai.pista_padel.repositorio;
 
 import edu.comillas.icai.pista_padel.entity.Pista;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface RepositorioPistas {
-    Pista guardar(Pista pista);
-    Optional<Pista> buscarPorId(Long idPista);
-    Optional<Pista> buscarPorNombre(String nombre);
-    List<Pista> listar();
-    void eliminar(Long idPista);
+@Repository
+public interface RepositorioPistas extends JpaRepository<Pista, Long> {
+
+    boolean existsByNombre(String nombre);
+
+    Optional<Pista> findByNombre(String nombre);
 }
