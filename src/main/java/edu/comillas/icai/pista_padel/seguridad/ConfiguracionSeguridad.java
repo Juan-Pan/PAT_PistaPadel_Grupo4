@@ -18,6 +18,10 @@ public class ConfiguracionSeguridad {
     @Bean
     public SecurityFilterChain filtroSeguridad(HttpSecurity http) throws Exception {
         http
+//                .csrf(csrf -> csrf.disable())
+//                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .httpBasic(Customizer.withDefaults())
+//                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(Customizer.withDefaults())
@@ -25,6 +29,8 @@ public class ConfiguracionSeguridad {
                         // públicos
                         .requestMatchers(HttpMethod.GET, "/pistaPadel/health").permitAll()
                         .requestMatchers(HttpMethod.POST, "/pistaPadel/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/pistaPadel/pistas/**").permitAll()
+
                         // el resto, autenticado
                         .anyRequest().authenticated()
                 );
