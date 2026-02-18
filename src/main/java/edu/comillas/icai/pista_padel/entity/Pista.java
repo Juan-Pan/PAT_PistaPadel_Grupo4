@@ -6,10 +6,10 @@ import java.util.Objects;
 public class Pista {
 
     private Long idPista;
-    private String nombre;       // único
+    private String nombre;
     private String ubicacion;
     private double precioHora;
-    private boolean activa;
+    private Boolean activa;
     private LocalDateTime fechaAlta;
 
     public Pista() {
@@ -19,7 +19,7 @@ public class Pista {
                  String nombre,
                  String ubicacion,
                  double precioHora,
-                 boolean activa,
+                 Boolean activa,
                  LocalDateTime fechaAlta) {
         this.idPista = idPista;
         this.nombre = nombre;
@@ -61,12 +61,16 @@ public class Pista {
         this.precioHora = precioHora;
     }
 
-    public boolean isActiva() {
+    public Boolean getActiva() {
         return activa;
     }
 
-    public void setActiva(boolean activa) {
+    public void setActiva(Boolean activa) {
         this.activa = activa;
+    }
+
+    public boolean isActiva() {
+        return activa != null && activa;
     }
 
     public LocalDateTime getFechaAlta() {
@@ -88,5 +92,17 @@ public class Pista {
     @Override
     public int hashCode() {
         return Objects.hash(idPista);
+    }
+
+    @Override
+    public String toString() {
+        return "Pista{" +
+                "idPista=" + idPista +
+                ", nombre='" + nombre + '\'' +
+                ", ubicacion='" + ubicacion + '\'' +
+                ", precioHora=" + precioHora +
+                ", activa=" + activa +
+                ", fechaAlta=" + fechaAlta +
+                '}';
     }
 }

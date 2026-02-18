@@ -1,15 +1,13 @@
 package edu.comillas.icai.pista_padel.servicio;
 
-import edu.comillas.icai.pista_padel.dto.PatchPistaRequest;
 import edu.comillas.icai.pista_padel.entity.Pista;
-import edu.comillas.icai.pista_padel.error.NoEncontradoException;
-import edu.comillas.icai.pista_padel.error.NombrePistaDuplicadoException;
 import edu.comillas.icai.pista_padel.repositorio.RepositorioPistas;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ServicioPista {
@@ -20,72 +18,48 @@ public class ServicioPista {
         this.repositorioPistas = repositorioPistas;
     }
 
-    // POST /courts
-    public Pista crear(Pista req) {
-        if (req.getNombre() == null || req.getNombre().isBlank()) {
-            throw new IllegalArgumentException("nombre requerido");
+    public Pista crearPista(Pista p) {
+        if (repositorioPistas.buscarPorNombre(p.getNombre()).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT);
         }
-
-        // nombre único -> 409
-        if (repositorioPistas.buscarPorNombre(req.getNombre()).isPresent()) {
-            throw new NombrePistaDuplicadoException(req.getNombre());
-        }
-
-        Pista p = new Pista();
-        p.setNombre(req.getNombre());
-        p.setUbicacion(req.getUbicacion());
-        p.setPrecioHora(req.getPrecioHora());
-        p.setActiva(req.isActiva());
+        p.setActiva(true);
         p.setFechaAlta(LocalDateTime.now());
-
         return repositorioPistas.guardar(p);
     }
 
-    // GET /courts
-    public List<Pista> listar() {
+    public List<Pista> listarPistas() {
         return repositorioPistas.listar();
     }
 
-    // GET /courts/{id}
-    public Pista obtener(Long id) {
+    public Pista buscarPista(Long id) {
         return repositorioPistas.buscarPorId(id)
-                .orElseThrow(() -> new NoEncontradoException("Pista no encontrada: " + id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    // PATCH /courts/{id}
-    public Pista patch(Long id, PatchPistaRequest cambios) {
-        Pista p = obtener(id);
+    public Pista actualizarPista(Long id, Pista p) {
+        Pista pistaExistente = buscarPista(id);
 
-        // nombre (si cambia, validar unicidad)
-        if (cambios.nombre() != null && !cambios.nombre().isBlank()
-                && !cambios.nombre().equalsIgnoreCase(p.getNombre())) {
-
-            Optional<Pista> existente = repositorioPistas.buscarPorNombre(cambios.nombre());
-            if (existente.isPresent() && !existente.get().getIdPista().equals(p.getIdPista())) {
-                throw new NombrePistaDuplicadoException(cambios.nombre());
+        if (p.getNombre() != null && !p.getNombre().equals(pistaExistente.getNombre())) {
+            if (repositorioPistas.buscarPorNombre(p.getNombre()).isPresent()) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT);
             }
-            p.setNombre(cambios.nombre());
+            pistaExistente.setNombre(p.getNombre());
         }
 
-        if (cambios.ubicacion() != null) {
-            p.setUbicacion(cambios.ubicacion());
+        if (p.getUbicacion() != null) {
+            pistaExistente.setUbicacion(p.getUbicacion());
         }
 
-        if (cambios.precioHora() != null) {
-            p.setPrecioHora(cambios.precioHora());
+        if (p.getPrecioHora() > 0) {
+            pistaExistente.setPrecioHora(p.getPrecioHora());
         }
 
-        if (cambios.activa() != null) {
-            p.setActiva(cambios.activa());
-        }
-
-        return repositorioPistas.guardar(p);
+        return repositorioPistas.guardar(pistaExistente);
     }
 
-    // DELETE /courts/{id}
-    public void eliminar(Long id) {
-        // opcional: validar que existe para devolver 404 si no
-        obtener(id);
-        repositorioPistas.eliminar(id);
+    public void borrarPista(Long id) {
+        Pista pista = buscarPista(id);
+        pista.setActiva(false);
+        repositorioPistas.guardar(pista);
     }
 }
