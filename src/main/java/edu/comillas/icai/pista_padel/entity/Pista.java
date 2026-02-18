@@ -9,7 +9,7 @@ public class Pista {
     private String nombre;
     private String ubicacion;
     private double precioHora;
-    private boolean activa;
+    private Boolean activa;
     private LocalDateTime fechaAlta;
 
     public Pista() {
@@ -19,7 +19,7 @@ public class Pista {
                  String nombre,
                  String ubicacion,
                  double precioHora,
-                 boolean activa,
+                 Boolean activa,
                  LocalDateTime fechaAlta) {
         this.idPista = idPista;
         this.nombre = nombre;
@@ -61,12 +61,16 @@ public class Pista {
         this.precioHora = precioHora;
     }
 
-    public boolean isActiva() {
+    public Boolean getActiva() {
         return activa;
     }
 
-    public void setActiva(boolean activa) {
+    public void setActiva(Boolean activa) {
         this.activa = activa;
+    }
+
+    public boolean isActiva() {
+        return activa != null && activa;
     }
 
     public LocalDateTime getFechaAlta() {
