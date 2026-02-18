@@ -1,6 +1,6 @@
 package edu.comillas.icai.pista_padel.repositorio;
 
-import edu.comillas.icai.gitt.pat.spring.jpa.entity.Usuario;
+//import edu.comillas.icai.gitt.pat.spring.jpa.entity.Usuario;
 import edu.comillas.icai.pista_padel.entity.Usuario;
 
 import java.util.List;
