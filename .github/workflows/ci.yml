@@ -1,6 +1,5 @@
 name: CI - Backend Java
 
-# ¿CUÁNDO SE EJECUTA?
 on:
   push:
     branches: [ "main", "develop" ] # Cuando alguien sube código a estas ramas
