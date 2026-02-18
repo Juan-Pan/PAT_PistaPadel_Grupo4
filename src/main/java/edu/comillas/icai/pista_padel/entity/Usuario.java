@@ -1,17 +1,29 @@
 package edu.comillas.icai.pista_padel.entity;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
+
     private String nombre;
     private String apellidos;
+
+    @Column(unique = true, nullable = false)
     private String email;
-    private String password; // cifrada (BCrypt)
+
+    private String password;
     private String telefono;
-    private Rol rol; // USER / ADMIN
+
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
+
     private LocalDateTime fechaRegistro;
     private boolean activo;
 

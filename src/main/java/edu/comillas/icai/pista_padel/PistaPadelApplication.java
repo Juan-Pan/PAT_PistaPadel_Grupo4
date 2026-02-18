@@ -9,6 +9,5 @@ public class PistaPadelApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PistaPadelApplication.class, args);
 	}
-// Prueba 1
 
 }
