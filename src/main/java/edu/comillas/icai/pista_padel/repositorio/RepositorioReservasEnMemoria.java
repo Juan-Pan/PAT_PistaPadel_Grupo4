@@ -1,7 +1,5 @@
 package edu.comillas.icai.pista_padel.repositorio;
 
-//import edu.comillas.icai.gitt.pat.spring.jpa.entity.EstadoReserva;
-//import edu.comillas.icai.gitt.pat.spring.jpa.entity.Reserva;
 import edu.comillas.icai.pista_padel.entity.EstadoReserva;
 import edu.comillas.icai.pista_padel.entity.Reserva;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,5 @@
 package edu.comillas.icai.pista_padel.repositorio;
 
-//import edu.comillas.icai.gitt.pat.spring.jpa.entity.Reserva;
 import edu.comillas.icai.pista_padel.entity.Reserva;
 
 import java.time.LocalDate;
