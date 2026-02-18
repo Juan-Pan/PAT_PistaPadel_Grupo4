@@ -2,13 +2,14 @@ package edu.comillas.icai.pista_padel;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
+@EnableScheduling
 public class PistaPadelApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PistaPadelApplication.class, args);
 	}
-// Prueba 1
+
 
 }
