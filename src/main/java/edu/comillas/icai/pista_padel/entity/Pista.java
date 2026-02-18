@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Pista {
 
     private Long idPista;
-    private String nombre;       // único
+    private String nombre;
     private String ubicacion;
     private double precioHora;
     private boolean activa;
@@ -88,5 +88,17 @@ public class Pista {
     @Override
     public int hashCode() {
         return Objects.hash(idPista);
+    }
+
+    @Override
+    public String toString() {
+        return "Pista{" +
+                "idPista=" + idPista +
+                ", nombre='" + nombre + '\'' +
+                ", ubicacion='" + ubicacion + '\'' +
+                ", precioHora=" + precioHora +
+                ", activa=" + activa +
+                ", fechaAlta=" + fechaAlta +
+                '}';
     }
 }

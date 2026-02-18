@@ -34,9 +34,8 @@ public class ConfiguracionSeguridad {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/pistaPadel/health").permitAll()
                         .requestMatchers(HttpMethod.POST, "/pistaPadel/auth/register").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/pistaPadel/pistas/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/pistaPadel/courts/**").permitAll()
 
-                        // el resto, autenticado
                         .anyRequest().authenticated()
                 );
 
