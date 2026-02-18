@@ -29,6 +29,7 @@ public class DatosIniciales {
             admin.setFechaRegistro(LocalDateTime.now());
             admin.setPassword(codificadorPassword.encode("admin"));
 
+
             repositorioUsuarios.guardar(admin);
         };
     }
