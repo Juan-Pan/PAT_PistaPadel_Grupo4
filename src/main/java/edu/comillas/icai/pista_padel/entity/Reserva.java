@@ -1,21 +1,29 @@
 package edu.comillas.icai.pista_padel.entity;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
 
+@Entity
+@Table(name = "reservas")
 public class Reserva {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReserva;
+
     private Long idUsuario;
     private Long idPista;
 
-    private LocalDate fechaReserva;    // día
+    private LocalDate fechaReserva;
     private LocalTime horaInicio;
     private int duracionMinutos;
 
-    private EstadoReserva estado;      // ACTIVA / CANCELADA
+    @Enumerated(EnumType.STRING)
+    private EstadoReserva estado;
+
     private LocalDateTime fechaCreacion;
 
     public Reserva() {
@@ -119,5 +127,19 @@ public class Reserva {
     @Override
     public int hashCode() {
         return Objects.hash(idReserva);
+    }
+
+    @Override
+    public String toString() {
+        return "Reserva{" +
+                "idReserva=" + idReserva +
+                ", idUsuario=" + idUsuario +
+                ", idPista=" + idPista +
+                ", fechaReserva=" + fechaReserva +
+                ", horaInicio=" + horaInicio +
+                ", duracionMinutos=" + duracionMinutos +
+                ", estado=" + estado +
+                ", fechaCreacion=" + fechaCreacion +
+                '}';
     }
 }

@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
-public class RepositorioReservasEnMemoria implements RepositorioReservas {
+public class RepositorioReservasEnMemoria implements RepositorioReservasMemoria {
 
     private final ConcurrentHashMap<Long, Reserva> reservas = new ConcurrentHashMap<>();
     private final AtomicLong contador = new AtomicLong(0);
@@ -38,7 +38,12 @@ public class RepositorioReservasEnMemoria implements RepositorioReservas {
     }
 
     @Override
-    public List<Reserva> listarPorUsuario(Long idUsuario) {
+    public Optional<Reserva> buscarPorNombre(String nombre) {
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Reserva> findByIdUsuario(Long idUsuario) {
         List<Reserva> out = new ArrayList<>();
         for (Reserva r : reservas.values()) {
             if (idUsuario != null && idUsuario.equals(r.getIdUsuario())) {
@@ -49,7 +54,7 @@ public class RepositorioReservasEnMemoria implements RepositorioReservas {
     }
 
     @Override
-    public List<Reserva> listarPorPistaYFecha(Long idPista, LocalDate fechaReserva) {
+    public List<Reserva> findByIdPistaAndFechaReserva(Long idPista, LocalDate fechaReserva) {
         List<Reserva> out = new ArrayList<>();
         for (Reserva r : reservas.values()) {
             if (idPista != null && idPista.equals(r.getIdPista())
@@ -72,10 +77,15 @@ public class RepositorioReservasEnMemoria implements RepositorioReservas {
             LocalTime finExistente = r.getHoraFin();
             if (inicioExistente == null || finExistente == null || horaInicio == null || horaFin == null) continue;
 
-            // solape: inicio1 < fin2 && inicio2 < fin1
             boolean solapa = horaInicio.isBefore(finExistente) && inicioExistente.isBefore(horaFin);
             if (solapa) out.add(r);
         }
         return out;
     }
+
+    @Override
+    public void eliminar(Long idReserva) {
+        reservas.remove(idReserva);
+    }
 }
+

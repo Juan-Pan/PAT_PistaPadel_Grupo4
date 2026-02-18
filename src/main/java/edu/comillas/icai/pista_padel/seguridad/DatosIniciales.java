@@ -17,7 +17,7 @@ public class DatosIniciales {
     public CommandLineRunner seedAdmin(RepositorioUsuarios repositorioUsuarios, PasswordEncoder codificadorPassword) {
         return args -> {
             String emailAdmin = "admin@admin.com";
-            if (repositorioUsuarios.buscarPorEmail(emailAdmin).isPresent()) return;
+            if (repositorioUsuarios.findByEmail(emailAdmin).isPresent()) return;
 
             Usuario admin = new Usuario();
             admin.setNombre("Admin");
@@ -29,7 +29,7 @@ public class DatosIniciales {
             admin.setFechaRegistro(LocalDateTime.now());
             admin.setPassword(codificadorPassword.encode("admin"));
 
-            repositorioUsuarios.guardar(admin);
+            repositorioUsuarios.save(admin);
         };
     }
 }

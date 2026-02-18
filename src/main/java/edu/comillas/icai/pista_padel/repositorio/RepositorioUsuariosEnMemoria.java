@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
-public class RepositorioUsuariosEnMemoria implements RepositorioUsuarios {
+public class RepositorioUsuariosEnMemoria implements RepositorioUsuariosMemoria {
 
     private final ConcurrentHashMap<Long, Usuario> usuarios = new ConcurrentHashMap<>();
     private final AtomicLong contador = new AtomicLong(0);
@@ -30,11 +30,16 @@ public class RepositorioUsuariosEnMemoria implements RepositorioUsuarios {
     }
 
     @Override
-    public Optional<Usuario> buscarPorEmail(String email) {
+    public Optional<Usuario> findByEmail(String email) {
         if (email == null) return Optional.empty();
         for (Usuario u : usuarios.values()) {
             if (email.equalsIgnoreCase(u.getEmail())) return Optional.of(u);
         }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Usuario> buscarPorNombre(String nombre) {
         return Optional.empty();
     }
 

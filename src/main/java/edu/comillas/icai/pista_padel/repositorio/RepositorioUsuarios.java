@@ -1,14 +1,12 @@
 package edu.comillas.icai.pista_padel.repositorio;
 
 import edu.comillas.icai.pista_padel.entity.Usuario;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface RepositorioUsuarios {
-    Usuario guardar(Usuario usuario);
-    Optional<Usuario> buscarPorId(Long idUsuario);
-    Optional<Usuario> buscarPorEmail(String email);
-    List<Usuario> listar();
-    void eliminar(Long idUsuario);
+@Repository
+public interface RepositorioUsuarios extends JpaRepository<Usuario, Long> {
+    Optional<Usuario> findByEmail(String email);
 }
