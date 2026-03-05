@@ -11,6 +11,7 @@ public class Usuario {
     private String nombre;
     private String apellidos;
     private String email;
+    private boolean baneado;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password; // cifrada (BCrypt)
     private String telefono;
@@ -29,7 +30,7 @@ public class Usuario {
                    String telefono,
                    Rol rol,
                    LocalDateTime fechaRegistro,
-                   boolean activo) {
+                   boolean activo, boolean baneado) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -39,6 +40,7 @@ public class Usuario {
         this.rol = rol;
         this.fechaRegistro = fechaRegistro;
         this.activo = activo;
+        this.baneado = baneado;
     }
 
     public Long getIdUsuario() {
@@ -115,6 +117,15 @@ public class Usuario {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public void setBaneado(boolean baneado)
+    {
+        this.baneado = baneado;
+    }
+    public boolean getBaneado()
+    {
+        return baneado;
     }
 
     @Override

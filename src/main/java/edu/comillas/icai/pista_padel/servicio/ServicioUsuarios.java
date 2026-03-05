@@ -98,6 +98,7 @@ public class ServicioUsuarios {
         if (cambios.getPassword() != null && !cambios.getPassword().isBlank()) {
             u.setPassword(passwordEncoder.encode(cambios.getPassword()));
         }
+        cambios.setBaneado(cambios.getBaneado()); // aca cambiamos el estado de baneado
 
         // NO dejamos cambiar rol desde PATCH (mejor práctica)
         // NO dejamos cambiar fechaRegistro / activo desde PATCH (salvo que lo pidan)

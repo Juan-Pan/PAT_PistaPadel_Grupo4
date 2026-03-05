@@ -8,9 +8,11 @@ import edu.comillas.icai.pista_padel.servicio.ServicioReservas;
 import edu.comillas.icai.pista_padel.repositorio.RepositorioUsuarios;
 import edu.comillas.icai.pista_padel.repositorio.RepositorioPistas;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -47,6 +49,10 @@ public class ControladorReservas {
     public Reserva crear(@RequestBody Reserva reserva) {
 
         Usuario usuario = obtenerUsuarioActual();
+        if(usuario.getBaneado())
+        {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "No se puede crear la reserva porque esta baneado");
+        }
 
         return servicioReservas.crearReserva(
                 usuario.getIdUsuario(),
