@@ -1,4 +1,4 @@
-package edu.comillas.icai.pista_padel.controlador;
+package edu.comillas.icai.pista_padel.controller;
 
 import edu.comillas.icai.pista_padel.entity.Usuario;
 import edu.comillas.icai.pista_padel.servicio.ServicioUsuarios;
@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/pistaPadel/auth")
-public class ControladorAuth {
+public class AuthController {
 
     private final ServicioUsuarios servicioUsuarios;
 
-    public ControladorAuth(ServicioUsuarios servicioUsuarios) {
+    public AuthController(ServicioUsuarios servicioUsuarios) {
         this.servicioUsuarios = servicioUsuarios;
     }
 

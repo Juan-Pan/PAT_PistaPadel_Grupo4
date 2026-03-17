@@ -13,12 +13,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 @RestController
 @RequestMapping("/pistaPadel")
-public class ControladorReservas {
+public class ReservaController {
 
     private final ServicioReservas servicioReservas;
     private final ServicioDisponibilidad servicioDisponibilidad;
@@ -26,10 +25,10 @@ public class ControladorReservas {
     private final RepositorioPistas repositorioPistas;
 
 
-    public ControladorReservas(ServicioReservas servicioReservas,
-                               ServicioDisponibilidad servicioDisponibilidad,
-                               RepositorioUsuarios repositorioUsuarios,
-                               RepositorioPistas repositorioPistas) {
+    public ReservaController(ServicioReservas servicioReservas,
+                             ServicioDisponibilidad servicioDisponibilidad,
+                             RepositorioUsuarios repositorioUsuarios,
+                             RepositorioPistas repositorioPistas) {
         this.servicioReservas = servicioReservas;
         this.servicioDisponibilidad = servicioDisponibilidad;
         this.repositorioUsuarios = repositorioUsuarios;
