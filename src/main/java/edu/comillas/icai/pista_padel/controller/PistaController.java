@@ -1,4 +1,4 @@
-package edu.comillas.icai.pista_padel.controlador;
+package edu.comillas.icai.pista_padel.controller;
 
 import edu.comillas.icai.pista_padel.entity.Pista;
 import edu.comillas.icai.pista_padel.servicio.ServicioPista;
@@ -10,11 +10,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pistaPadel/courts")
-public class ControladorPistas {
+public class PistaController {
 
     private final ServicioPista servicioPista;
 
-    public ControladorPistas(ServicioPista servicioPista) {
+    public PistaController(ServicioPista servicioPista) {
         this.servicioPista = servicioPista;
     }
 
