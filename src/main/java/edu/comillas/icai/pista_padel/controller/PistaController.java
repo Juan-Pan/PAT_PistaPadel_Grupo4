@@ -21,8 +21,8 @@ public class PistaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('ADMIN')")
-    public Pista crear(@RequestBody Pista req) {
-        return servicioPista.crearPista(req);
+    public Pista crear(@RequestBody Pista pista) {
+        return servicioPista.crearPista(pista);
     }
 
     @GetMapping

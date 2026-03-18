@@ -19,8 +19,8 @@ public class AuthController {
     // Público (permitAll en ConfiguracionSeguridad)
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED) // 201
-    public Usuario register(@RequestBody Usuario req) {
-        return servicioUsuarios.registrar(req);
+    public Usuario register(@RequestBody Usuario usuario) {
+        return servicioUsuarios.registrar(usuario);
     }
 
     // Requiere auth (por ConfiguracionSeguridad)
